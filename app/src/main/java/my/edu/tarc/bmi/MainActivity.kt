@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
             editTextWeight.text.clear()
             editTextWeight.requestFocus()
             editTextHeight.text.clear()
-            textViewStatus.text = ""
+            textViewStatus.text = getString(R.string.status)
+            textViewBMI.text = getString(R.string.bmi)
             imageViewBMI.setImageResource(R.drawable.empty)
         }
     }
