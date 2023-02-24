@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Linking between UI and code
         val textViewStatus : TextView = findViewById(R.id.textViewStatus)
         val imageViewBMI : ImageView = findViewById(R.id.imageViewBMI)
         val editTextWeight : EditText = findViewById(R.id.editTextWeight)
@@ -22,27 +23,28 @@ class MainActivity : AppCompatActivity() {
         val buttonReset : Button = findViewById(R.id.buttonReset)
 
         buttonCalculate.setOnClickListener {
-            if (editTextWeight.length() == 0) {
-                editTextWeight.error = "Weight is required"
-                return@setOnClickListener
+            if (editTextWeight.text.isEmpty()) {
+                editTextWeight.error = getString(R.string.errWeight)
+                return@setOnClickListener // Terminate program execution
             }
-            if (editTextHeight.length() == 0) {
-                editTextHeight.error = "Height is required"
+            if (editTextHeight.text.isEmpty()) {
+                editTextHeight.error = getString(R.string.errHeight)
                 return@setOnClickListener
             }
 
             val weight = editTextWeight.text.toString().toDouble()
             val height = editTextHeight.text.toString().toDouble()
+
             val result = weight / (height / 100).pow(2)
 
             if (result > 25) {
-                textViewStatus.text = "Overweight"
+                textViewStatus.setText(R.string.over)
                 imageViewBMI.setImageResource(R.drawable.over)
             } else if (result in 18.5..24.9) {
-                textViewStatus.text = "Normal"
+                textViewStatus.setText(R.string.normal)
                 imageViewBMI.setImageResource(R.drawable.normal)
             } else {
-                textViewStatus.text = "Underweight"
+                textViewStatus.setText(R.string.under)
                 imageViewBMI.setImageResource(R.drawable.under)
             }
         }
