@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Linking between UI and code
+        val textViewBMI : TextView = findViewById(R.id.textViewBMI)
         val textViewStatus : TextView = findViewById(R.id.textViewStatus)
         val imageViewBMI : ImageView = findViewById(R.id.imageViewBMI)
         val editTextWeight : EditText = findViewById(R.id.editTextWeight)
@@ -38,13 +39,16 @@ class MainActivity : AppCompatActivity() {
             val result = weight / (height / 100).pow(2)
 
             if (result > 25) {
-                textViewStatus.setText(R.string.over)
+                textViewBMI.text = String.format("%s : %.2f", getString(R.string.bmi), result)
+                textViewStatus.text = String.format("%s : %s", getString(R.string.status), getString(R.string.over))
                 imageViewBMI.setImageResource(R.drawable.over)
             } else if (result in 18.5..24.9) {
-                textViewStatus.setText(R.string.normal)
+                textViewBMI.text = String.format("%s : %.2f", getString(R.string.bmi), result)
+                textViewStatus.text = String.format("%s : %s", getString(R.string.status), getString(R.string.normal))
                 imageViewBMI.setImageResource(R.drawable.normal)
             } else {
-                textViewStatus.setText(R.string.under)
+                textViewBMI.text = String.format("%s : %.2f", getString(R.string.bmi), result)
+                textViewStatus.text = String.format("%s : %s", getString(R.string.status), getString(R.string.under))
                 imageViewBMI.setImageResource(R.drawable.under)
             }
         }
